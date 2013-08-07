@@ -1,0 +1,27 @@
+#avoir_prev{
+	background: url(images/prev.png) no-repeat transparent;
+	width: 40px;
+	height: 40px;
+	display: block;
+	position: absolute;
+	top: 815px;
+}
+
+#avoir_next{
+	background: url(images/next.png) no-repeat transparent;
+	width: 40px;
+	height: 40px;
+	display: block;
+	position: absolute;
+	margin-left: 915px;
+	top: 815px;
+}
+
+#avoir_prev.disabled {   background-position: -50px -100px !important;  }
+#avoir_next.disabled {   background-position: -50px -100px !important;  }
+#avoir_prev.disabled, #avoir_next.disabled {
+    cursor: default;
+}
+#avoir_prev span, a.next span {
+   display: none;
+}

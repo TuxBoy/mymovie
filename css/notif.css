@@ -1,0 +1,87 @@
+/* line 3, notif.scss */
+.alert {
+  display: none;
+}
+
+/* line 7, notif.scss */
+input:focus:invalid {
+  border-color: #FF0000;
+  background-image: none;
+  -webkit-box-shadow: 0 0 5px #d45252;
+  -moz-box-shadow: 0 0 5px #d45252;
+  box-shadow: 0 0 5px #d45252;
+}
+
+/* line 13, notif.scss */
+.scroll {
+  float: right;
+  width: 100px;
+  position: fixed;
+  bottom: 50px;
+  margin-left: 995px;
+}
+/* line 19, notif.scss */
+.scroll a {
+  display: block;
+  background: #FFF;
+  height: 50px;
+  width: 70px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 0 5px #d45252;
+  -moz-box-shadow: 0 0 5px #d45252;
+  box-shadow: 0 0 5px #d45252;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* line 31, notif.scss */
+.result {
+  display: none;
+  float: right;
+  width: 250px;
+  margin-right: 87px;
+  margin-top: -29px;
+  border: 1px solid #D0D0D0;
+  background: #000;
+  color: #fff;
+  z-index: 2000;
+  -moz-border-radius-bottomleft: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  -moz-border-radius-bottomright: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+/* line 42, notif.scss */
+.result .name {
+  top: 20px;
+}
+/* line 45, notif.scss */
+.result .name:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+/* line 51, notif.scss */
+.mess-comment {
+  width: 600px;
+}
+
+/* line 55, notif.scss */
+.message {
+  width: 600px;
+}
+/* line 57, notif.scss */
+.message .contents {
+  color: #fff;
+  margin-left: 91px;
+  margin-top: -39px;
+}
+/* line 64, notif.scss */
+.message .pseudo {
+  margin-bottom: 3px;
+}

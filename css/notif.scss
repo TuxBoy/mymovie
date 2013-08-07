@@ -1,0 +1,67 @@
+@import "compass";
+
+.alert{
+	display: none;
+}
+
+input:focus:invalid{
+	border-color: #FF0000;
+	background-image: none;
+	@include single-box-shadow(#d45252,0,0,5px);
+}
+
+.scroll{
+	float: right;
+	width: 100px;
+	position: fixed;
+	bottom: 50px;
+	margin-left: 995px;
+	a{
+		display: block;
+		background: #FFF;
+		height: 50px;
+		width: 70px;
+		@include border-radius(10px);
+		@include single-box-shadow(#d45252,0,0,5px);
+		text-align: center;
+		margin-bottom: 20px;
+	}
+}
+
+.result{
+	display: none;
+	float: right;
+	width: 250px;
+	margin-right: 87px;
+	margin-top: -29px;
+	border: 1px solid #D0D0D0;
+	background: #000;
+	color: #fff;
+	z-index: 2000;
+	@include border-bottom-radius(5px);
+	.name{
+		top: 20px;
+	}
+	.name:hover{
+		background-color: #fff;
+		color: #000;
+	}
+}
+
+.mess-comment{
+	width: 600px;
+}
+
+.message{
+	width: 600px;
+	.contents{
+		color: #fff;
+		margin-left: 91px;
+		margin-top: -39px;
+
+	}
+
+	.pseudo{
+		margin-bottom: 3px;
+	}
+}
