@@ -23,12 +23,12 @@ if (!empty($_POST)){
 		$error = 'Votre compte utilisateur est introuvable ! (Veuillez vérifier votre pseudo ou mot de passe)';
 	}
 }
-
  ?>
 
 <!-- Main -->
 	<div id="">				
 		<h1>Se connecter</h1>
+		
 		<h2>Connectez-vous à votre compte movie hunter</h2> <br> <br>
 		<?php if (isset($error)) echo '<span class="error-message">'.$error.'</span><br><br>'; ?>
 		<form action="auth.php" method="post">

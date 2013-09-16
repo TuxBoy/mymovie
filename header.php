@@ -4,9 +4,9 @@
   <head>
     <meta charset="utf-8">
     <?php if (isset($title)): ?>      
-      <title><?= $title; ?> - Movie Hunter</title>
+      <title><?= $title; ?> - My Movie</title>
     <?php else: ?>
-      <title>Movie Hunter</title>
+      <title>My Movie</title>
     <?php endif; ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Centralisation des films préférés de chacun">
@@ -20,16 +20,17 @@
   <link rel="stylesheet" href="css/notifTest.css" type="text/css" media="all" />
   <link rel="stylesheet" href="css/bootstrap.css" type="text/css" media="all" />
   <link href="js/zoombox/zoombox.css" rel="stylesheet" type="text/css" media="screen" />
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
   
   <script type="text/javascript" src="js/jquery-1.6.2.min.js" charset="utf-8"></script>
   <!--[if IE 6]>
     <script src="js/DD_belatedPNG-min.js" type="text/javascript" charset="utf-8"></script>
   <![endif]-->
   <script type="text/javascript" src="js/jquery-func.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
   <script type="text/javascript" src="js/zoombox/zoombox.js"></script>
   <script type="text/javascript" src="js/box.js"></script>
-
-  <script>document.write('<script src="http://' + (location.host || '${1:localhost}').split(':')[0] + ':${2:35729}/livereload.js?snipver=1"></' + 'script>')</script>
+  <script type="text/javascript" src="js/note.js"></script>
 </head>
 <body>
 <!-- Shell -->

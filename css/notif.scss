@@ -62,6 +62,74 @@ input:focus:invalid{
 	}
 
 	.pseudo{
-		margin-bottom: 3px;
+		position: absolute;
+		margin-top: -42px;
 	}
+	.date{
+		position: absolute;
+		margin-left: 120px;
+		margin-top: -40px;
+		font-size: 9px;
+
+	}
+}
+
+/** Mise en place des note via étoile **/
+
+ul.notes-echelle{
+	margin: 0;
+	padding:0;
+	font:.75em/1.2 Arial, Helvetica, sans-serif;
+	li{
+		float: left;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		min-width: 20px;
+		min-height: 20px;
+		label{
+			display: block;
+			text-align: center;
+			line-height: 20px;
+			background: url(images/etoiles.gif) center top no-repeat;
+		}
+	}
+}
+ul.notes-echelle li.note-off label{
+	background-position: center -60px;
+}
+
+ul.notes-echelle.js input{
+	position: absolute;
+	left: -999px;
+}
+
+ul.notes-echelle li.note-checked {
+	font-weight:bold;
+}
+
+/** Infobulle **/
+
+.infobulle{
+	position: absolute;
+	background: none repeat scroll 0 0 #000;
+	padding: 3px 7px;
+	@include border-radius(3px);
+	color: #d4d4d4;
+	text-align: center;
+	white-space: nowrap;
+	transform:scale(0) rotate(-12deg);
+	z-index: 10000;
+}
+
+.loading{
+	display: none;
+}
+.star{
+	position: absolute;
+	margin-right: 200px;
+}
+.noRate{
+	font-size: 10px;
+	margin-right: 70px;
 }

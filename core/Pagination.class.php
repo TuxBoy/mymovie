@@ -14,9 +14,9 @@ class Pagination{
 		$prev		= $cPage - 1;
 		$lpm1		= $nbPage - 1;
 
-		if ($url == null) $url = '';		
+		//if ($url == null) unset($url);		
 
-		if ($cPage == 1) 	$pagination .= '<li class="active"><a href="listmovies.php?p='.$prev.$url.'">Précédent</a></li>';
+		if ($cPage == 1) 	$pagination .= '<li class="active"><a href="listmovies.php?p='.$prev.'?'.$url.'">Précédent</a></li>';
 		else 				$pagination .= '<li><a href="listmovies.php?p='.$prev.$url.'">Précédent</a></li>';		
 
 		// Pas assé de page pour les couper

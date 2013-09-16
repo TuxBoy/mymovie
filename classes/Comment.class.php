@@ -13,7 +13,7 @@ class Comment{
 	* @return array
 	**/
 	public function readCom($id){
-		$sql = 'SELECT users.id, users.pseudo,users.email, title.id, title.name, comments.id, comments.id_movie, comments.message, comments.id_user
+		$sql = 'SELECT users.id, users.pseudo,users.email, title.id, title.name, comments.id, comments.id_movie, comments.message, comments.id_user, comments.date_com
 				FROM comments 
 				LEFT JOIN title ON comments.id_movie = title.id
 				LEFT JOIN users ON comments.id_user = users.id

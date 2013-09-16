@@ -14,7 +14,7 @@ class Form {
 
 	public function setData($data){
 		if (!empty($data)) 	$this->_data = $data;
-		else 			  	$this->_data = "";
+		else 			  				$this->_data = "";
 	}
 
 	/**

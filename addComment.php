@@ -7,7 +7,7 @@ if (!empty($_POST)){
 	$comment->addCom(array(
 		':id_user'		=> 9,
 		':message' 		=> $message,
-		':date_com'		=> date(),
+		':date_com'		=> date('Y-m-d H:i:s'),
 		':id_movie' 	=> $id_movie
 	));
 

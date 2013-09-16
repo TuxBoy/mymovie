@@ -9,12 +9,12 @@
 <?php 
 if (isset($_GET['v'])){
 	$v = $_GET['v'];	
+	$countByView 		= $DB->query('SELECT * FROM title WHERE view='.$v);
 }
 
 $count 				= $DB->query('SELECT id FROM title');
-$countByView 		= $DB->query('SELECT * FROM title WHERE view='.$v);
 $adjacent 			= 3;
-$cPage 				= 1;
+$cPage 			= 1;
 
 if (isset($_GET['p'])){
 	if (is_numeric($_GET['p'])){
@@ -24,34 +24,36 @@ if (isset($_GET['p'])){
 }
 
 $nbrMovie		= count($count);
-$nbrMovieView 	= count($countByView);
+
 $perPage 		= 20;
 
 $nbrPageDebut 		= (($cPage - 1) * $perPage);
-$nbPage 			= ceil($nbrMovie/$perPage);
-$nbPageMovieView 	= ceil($nbrMovieView/$perPage);
-$lpm1				= $nbPage - 1;
+$nbPage 				= ceil($nbrMovie/$perPage);
+//$nbPageMovieView 	= ceil($nbrMovieView/$perPage);
+$lpm1					= $nbPage - 1;
 
 
 // Séléctionne tous les films
 if (isset($v)) {
+	$nbrMovieView 	= count($countByView);
+	$nbPageMovieView 	= ceil($nbrMovieView/$perPage);
 	$sql = "SELECT id,name,poster,view FROM title WHERE view=$v  ORDER BY id DESC LIMIT $nbrPageDebut,$perPage";
+
 } else {
 	$sql = "SELECT id,name,poster,view FROM title  ORDER BY id DESC LIMIT $nbrPageDebut,$perPage";
 }					
-
 $movies = $DB->query($sql);
-$url = '&v='.$v;
+
 ?>
 <?php echo $flash->flash(); ?>
 <?php if (isset($v)): ?>
 <h3><?= $nbrMovieView; ?> Films vus</h3>
-
-<?= Pagination::toString($nbPageMovieView, $adjacent, $cPage, $url); ?>
+	<?php $url = '&v='.$v;  ?>
+<?= Pagination::toString($nbPageMovieView, $adjacent, $cPage,$url); ?>
 <?php else: ?>
 	<h3><?= $nbrMovie; ?> Films</h3>
 
-	<?= Pagination::toString($nbPage, $adjacent, $cPage, $url); ?>
+	<?= Pagination::toString($nbPage, $adjacent, $cPage); ?>
 <?php endif; ?>
 <div class="scroll">
 	<a href="#">Haut</a>
@@ -85,10 +87,10 @@ $url = '&v='.$v;
 
 					if ($movie->view == 0){
 						$class 	= 'label label-important';
-						$text 	= 'Vu';
+						$text 	= 'Pas vu';
 					}else{
 						$class 	= 'label label-success';
-						$text	= 'Pas vu';
+						$text		= 'Vu';
 					}
 					$i++;
 
@@ -106,8 +108,9 @@ $url = '&v='.$v;
 	</tbody>
 </table>
 <?php if (isset($v)): ?>
+	<?php $url = '&v='.$v;  ?>
 <?= Pagination::toString($nbPageMovieView, $adjacent, $cPage, $url); ?>
 <?php else: ?>
-	<?= Pagination::toString($nbPage, $adjacent, $cPage, $url); ?>
+	<?= Pagination::toString($nbPage, $adjacent, $cPage); ?>
 <?php endif; ?>
 <?php require 'footer.php'; ?>

@@ -2,19 +2,16 @@
 
 <?php 
 if (isset($_GET['m'])){
-	$m = (int) $_GET['m'];
+	$m 		= (int) $_GET['m'];
+	$sql 	= 'SELECT id,name,poster,view FROM title WHERE id='.$m;
+	$movie 	= $DB->query($sql);
 }
 
 if (isset($_GET['action'])){
 	$action = $_GET['action'];
 }
 
-$sql 	= 'SELECT id,name,poster,view FROM title WHERE id='.$m;
-$movie 	= $DB->query($sql);
-
  ?>
-
-
 <?php 
 switch ($action) {
 	case 'add':
@@ -66,7 +63,8 @@ switch ($action) {
 			//require 'header.php'; 			
 			$flash->flash();
 		?>
-		<?php foreach($movie as $mov): ?>	
+		<?php foreach($movie as $mov): ?>
+		<?php $ratings = $DB->query('SELECT * FROM ratings WHERE id_movie='.$mov->id); ?>	
 		<div class="row">			
 			<div class="span2">
 				<?php if ($mov->poster != null): ?>
@@ -77,15 +75,57 @@ switch ($action) {
 			</div>
 			<div class="span5">
 				<h2><?= $mov->name; ?></h2>
+				<div class="stars">
+							<div class="stars-in">
+								
+							</div>
+							<?php foreach ($ratings as $rating): ?>
+							<?php if ($rating->nb_votes != null): ?>
+								<p> (<?php echo '<span class="moy">'.round($rating->moy_votes, 1). '</span>'; ?> / 5 vote(s))</p>
+							<?php else: ?>
+								<p>Ce film n'a pas été encore voté !</p>
+							<?php endif; ?>
+							<?php endforeach; ?>
+						</div>
 			</div>
+			<div class="dialog" title="Erreur">
+				
+			</div>
+			<div class="loading"><img src="css/images/load.gif" alt="Loading"></div>
+		<div class="gere_movie">
+			<div class="rating">
+					<form action="note.php" method="post">
+						<input type="hidden" name="id_movie" value="<?= $mov->id; ?>" class="id">
+						<ul class="notes-echelle">
+							<li>
+								<label for="note01<?= $mov->id; ?>" title="Note&nbsp;: 1 sur 5">1</label>
+								<input type="radio" name="notesA" id="note01<?= $mov->id; ?>" value="1" class="radioNote">
+							</li>
+							<li>
+								<label for="note02<?= $mov->id; ?>" title="Note&nbsp;: 2 sur 5" class="infoNote">2</label>
+								<input type="radio" name="notesA" id="note02<?= $mov->id; ?>" value="2" class="radioNote">
+							</li>
+							<li>
+								<label for="note03<?= $mov->id; ?>" title="Note&nbsp;: 3 sur 5" class="infoNote">3</label>
+								<input type="radio" name="notesA" id="note03<?= $mov->id; ?>" value="3" class="radioNote">
+							</li>
+							<li>
+								<label for="note04<?= $mov->id; ?>" title="Note&nbsp;: 4 sur 5" class="infoNote">4</label>
+								<input type="radio" name="notesA" id="note04<?= $mov->id; ?>" value="4" class="radioNote">
+							</li>
+							<li>
+								<label for="note05<?= $mov->id; ?>" title="Note&nbsp;: 5 sur 5" class="infoNote">5</label>
+								<input type="radio" name="notesA" id="note05<?= $mov->id; ?>" value="5" class="radioNote">
+							</li>
+						</ul>
+			</div>
+		</div>
 		</div>
 		<?php endforeach; ?>
 		<hr>
 		<?php 	
 			/* Récupère et affiche les commentaires : */
-			$comments 	= $comment->readCom($m);	
-			//$mailMd5	= md5($comments->email);
-		
+			$comments 	= $comment->readCom($m);					
 		?>
 		<div class="comment">
 			<h3 id="comment">Commentaires<sub>(<?php echo count($comments); ?>)</sub></h3>
@@ -107,11 +147,13 @@ switch ($action) {
 		<?php if (count($comments) >= 1): ?>
 			<?php foreach($comments as $co): ?>
 				<?php 
-					$avatar = "http://www.gravatar.com/avatar/".md5($comments->email).".png?s=80";
+					$avatar = "http://www.gravatar.com/avatar/".md5($co->email);
 				 ?>
 				<div class="message">
-					<div class="avatar"><img src="<?php echo $avatar; ?>" alt="Votre Gravatar"></div>					
+					<div class="avatar"><img src="<?php echo $avatar; ?>" alt="Votre Gravatar"/></div>									
 					<div class="contents">
+					<div class="date"> <time datetime="<?php echo $co->date_com; ?>+02:00" pubdate><?php echo $co->date_com; ?></time> 
+					</div>
 					<div class="pseudo">Posté par : <a href=""><?php echo $co->pseudo; ?></a></div>
 						<?php echo $co->message; ?>
 					</div>

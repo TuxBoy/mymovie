@@ -6,16 +6,17 @@ if (!$user->isLogged()){
 	header('Location:index.php');
 }
 
+//if (isset($_GET['']))
+
 
 if (!empty($_POST)){
 	extract($_POST);
-	$name = htmlentities($name);
-
-	$newName 		= strtolower($name);
+	$name 			= htmlentities($name);
+	$newName  	= strtolower($name);
 
 	// Renomme l'affiche avec le titre du film
 	$nameForlder 	= basename($_FILES['poster']['name']);
-	$folder 	 	= explode('.', $nameForlder);
+	$folder 	 		= explode('.', $nameForlder);
 	$folderFinal 	= str_replace($folder['0'], $newName, $folder);
 	$newFolder 		= implode(".", $folderFinal);  
 
@@ -33,46 +34,47 @@ if (!empty($_POST)){
 		}
 	}
 
+	
+
 	// Enregistre l'image dans la base :
 	// Si l'id n'existe pas => INSERT
-	if (!isset($id)){
-		if ($view == 'checked') $view = 1;
+	if (!isset($id)){		
+		if ($view == 'checked') 	$view = 1;
 		else 					$view = 0;
-
 		$data = array(
-			':name' 	=> $name,
-			':poster'	=> $newFolder,
+			':name' 		=> $name,
+			':poster'		=> $newFolder,
 			':view'		=> $view
 		);
 		$sql = "INSERT INTO title(name,poster,view) VALUES(:name,:poster,:view)";		
 		$DB->insert($sql, $data);
 		$flash->setFlash('Le film a bien été ajouté');
-		header('Location:listmovies.php');
-	}
-
-	if ($view = 'checked'){
-		$data = array(
-			':id'		=> $id,
-			':name'		=> $name,
-			':poster'	=> $newFolder,
-			':view'		=> 1
-		);
-		$DB->insert('UPDATE title SET name=:name, poster=:poster, view=:view WHERE id=:id', $data);	
-		$flash->setFlash('Le film a bien été édité');
-		header('Location:listmovies.php');	 				
-	} else {
-		$data = array(
-			':id'		=> $id,
-			':name'		=> $name,
-			':poster'	=> $newFolder
-		);
-		$DB->insert('UPDATE title SET name=:name, poster=:poster WHERE id=:id', $data);
-		$flash->setFlash('Le film a bien été édité');
-		header('Location:listmovies.php');
+		header('Location:'.$_SERVER['HTTP_REFERER']);
+	}else{
+		if ($view == 'checked' || $view != 'checked'){
+			$data = array(
+				':id'			=> $id,
+				':name'		=> $name,
+				':poster'		=> $newFolder,
+				':view'		=> 1
+			);
+			$DB->insert('UPDATE title SET name=:name, poster=:poster, view=:view WHERE id=:id', $data);	
+			$flash->setFlash('Le film a bien été édité');
+			header('Location:'.$_SERVER['HTTP_REFERER']);	 				
+		} else {
+			$data = array(
+				':id'			=> $id,
+				':name'		=> $name,
+				':poster'		=> $newFolder
+			);
+			$DB->insert('UPDATE title SET name=:name, poster=:poster WHERE id=:id', $data);
+			$flash->setFlash('Le film a bien été édité');
+			header('Location:'.$_SERVER['HTTP_REFERER']);
+		}
 	}
 } else {
 	$flash->setFlash('Il n\'y a pas d\'informations à modifier', 'error');
-	header('Location:listmovies.php');
+	header('Location:'.$_SERVER['HTTP_REFERER']);
 }
 
 

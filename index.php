@@ -7,7 +7,11 @@
 
 			<?php 
 				// Récupère tous les films vu
-				$moviesView = $DB->query('SELECT * FROM title WHERE view=1 ORDER BY id DESC');				
+				$moviesView = $DB->query('SELECT title.id, title.name, title.poster, title.view, ratings.tt_votes, ratings.nb_votes, ratings.moy_votes, ratings.id_movie
+																	FROM title 
+																	LEFT JOIN ratings ON title.id = ratings.id_movie
+																	WHERE title.view=1 
+																	ORDER BY title.id DESC');						
 			 ?>
 			<!-- Box -->
 			<div class="box">
@@ -20,26 +24,35 @@
 				<!-- Movie -->
 				<div id="carrousel">
 				<?php foreach($moviesView as $movie): ?>
-				<div class="movie">				
-					<div class="movie-image">
-						
-						<a href="movie.php?m=<?= $movie->id; ?>&action=consult"><span class="play"><span class="name"><?= $movie->name; ?></span></span>
-							<img src="css/images/affiches/<?= $movie->poster; ?>" alt="<?= $movie->poster; ?>" /></a>
-						
-					</div>										
-					<div class="rating">
-						<p>Note</p>
-						<div class="stars">
-							<div class="stars-in">
-								
+					<div class="movie">				
+						<div class="movie-image">
+							
+							<a href="movie.php?m=<?= $movie->id; ?>&action=consult"><span class="play"><span class="name"><?= $movie->name; ?></span></span>
+								<img src="css/images/affiches/<?= $movie->poster; ?>" alt="<?= $movie->poster; ?>" /></a>
+							
+						</div>							
+						<div class="rating">	
+						<?php 							
+								if (($movie->tt_votes == 0) && ($movie->nb_votes == 0)) $star = 0;
+								else																										$star = round($movie->moy_votes);											
+
+								if ($movie->nb_votes > 0){
+									echo '<span name="star"><img src="css/images/stars/'.$star.'stars.png" alt="rate" title="('. $movie->moy_votes .'/ 5 - '. $movie->nb_votes .' votes)"></span>';
+								}else{
+									echo '<span class="noRate">Ce film n\'a pas été encore voté !</span>';	
+								}
+						?>								
+							<div class="stars">
+								<div class="stars-in">
+									
+								</div>
 							</div>
+							<?php 
+								$comments = $comment->readCom($movie->id);
+							 ?>
+							<a href="movie.php?m=<?= $movie->id; ?>&action=consult#comment"><span class="comments"><?php echo count($comments); ?></span></a>
 						</div>
-						<?php 
-							$comments = $comment->readCom($movie->id);
-						 ?>
-						<a href="movie.php?m=<?= $movie->id; ?>&action=consult#comment"><span class="comments"><?php echo count($comments); ?></span></a>
 					</div>
-				</div>
 				<?php endforeach; ?>
 				</div>
 				<a class="prev" id="movie_prev" href="#"><span>prev</span></a>
@@ -64,7 +77,7 @@
 				<div class="movie">
 					
 					<div class="movie-image">
-						<a href="#"><span class="play"><span class="name"><?= $movieNoView->name; ?></span></span>
+						<a href="movie.php?m=<?= $movieNoView->id; ?>&action=consult"><span class="play"><span class="name"><?= $movieNoView->name; ?></span></span>
 						<?php if ($movieNoView->poster != null): ?>
 							<img src="css/images/affiches/<?= $movieNoView->poster; ?>" alt="<?= $movieNoView->poster; ?>">
 						<?php else: ?>
@@ -79,7 +92,8 @@
 								
 							</div>
 						</div>
-						<span class="comments">12</span>
+						
+						<a href="movie.php?m=<?= $movie->id; ?>&action=consult#comment"><span class="comments"><?php echo count($comments); ?></span></a>
 					</div>
 				</div>
 				<?php endforeach; ?>

@@ -31,7 +31,7 @@ h4 { font-size:14px; color:#f3b12b; font-weight:bold; }
 #header { position:relative; }
 
 h1#logo { position:absolute; top:37px; left:0; }
-h1#logo a { float:left; width:239px; height:49px; background:url('images/logo.gif') no-repeat 0 0; font-size: 0; line-height: 0; text-indent: -4000px; }
+h1#logo a { float:left; width:239px; height:49px; background:url('images/logo.png') no-repeat 0 0; font-size: 0; line-height: 0; text-indent: -4000px; }
 
 .social { float:right; width:160px; padding-top:11px; }
 .social span { float:left; display:inline; font-size:10px; color:#9f9f9f; line-height:16px; padding-right:5px; }
@@ -79,8 +79,8 @@ h1#logo a { float:left; width:239px; height:49px; background:url('images/logo.gi
 
 .rating { float:left; width:152px; padding-top:8px; }
 .rating p { float:left; font-size:10px; color:#fff; font-weight:bold; }
-.rating .stars { float:left; width:60px; height:11px; background:url('images/stars.gif') no-repeat 0 0; margin-left:2px;}
-.rating .stars-in { width:48px; display:inline; background:url('images/stars.gif') no-repeat 0 bottom; position:absolute; height:11px; font-size: 0; line-height: 0; text-indent: -4000px;}
+.rating .stars { float:left; width:60px; height:11px; margin-left:2px;}
+.rating .stars-in { width:48px; display:inline; position:absolute; height:11px; font-size: 0; line-height: 0; text-indent: -4000px;}
 .comments { background:url('images/comments.gif') no-repeat 0 center; padding-left:12px; float:right; }
 
 #news { width:460px; float:left; }

@@ -1,3 +1,4 @@
+@charset "CP850";
 /* line 3, notif.scss */
 .alert {
   display: none;
@@ -83,5 +84,88 @@ input:focus:invalid {
 }
 /* line 64, notif.scss */
 .message .pseudo {
-  margin-bottom: 3px;
+  position: absolute;
+  margin-top: -42px;
+}
+/* line 68, notif.scss */
+.message .date {
+  position: absolute;
+  margin-left: 120px;
+  margin-top: -40px;
+  font-size: 9px;
+}
+
+/** Mise en place des note via étoile **/
+/* line 79, notif.scss */
+ul.notes-echelle {
+  margin: 0;
+  padding: 0;
+  font: .75em/1.2 Arial, Helvetica, sans-serif;
+}
+/* line 83, notif.scss */
+ul.notes-echelle li {
+  float: left;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  min-width: 20px;
+  min-height: 20px;
+}
+/* line 90, notif.scss */
+ul.notes-echelle li label {
+  display: block;
+  text-align: center;
+  line-height: 20px;
+  background: url(images/etoiles.gif) center top no-repeat;
+}
+
+/* line 98, notif.scss */
+ul.notes-echelle li.note-off label {
+  background-position: center -60px;
+}
+
+/* line 102, notif.scss */
+ul.notes-echelle.js input {
+  position: absolute;
+  left: -999px;
+}
+
+/* line 107, notif.scss */
+ul.notes-echelle li.note-checked {
+  font-weight: bold;
+}
+
+/** Infobulle **/
+/* line 113, notif.scss */
+.infobulle {
+  position: absolute;
+  background: none repeat scroll 0 0 #000;
+  padding: 3px 7px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  color: #d4d4d4;
+  text-align: center;
+  white-space: nowrap;
+  transform: scale(0) rotate(-12deg);
+  z-index: 10000;
+}
+
+/* line 125, notif.scss */
+.loading {
+  display: none;
+}
+
+/* line 128, notif.scss */
+.star {
+  position: absolute;
+  margin-right: 200px;
+}
+
+/* line 132, notif.scss */
+.noRate {
+  font-size: 10px;
+  margin-right: 70px;
 }
